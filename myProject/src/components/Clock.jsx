@@ -5,6 +5,7 @@ class Clock extends React.Component {
     super(props);
     this.state = {
       date: new Date(),
+      locale: "bn-BD",
     };
   }
   componentDidMount() {
@@ -20,13 +21,24 @@ class Clock extends React.Component {
       date: new Date(),
     });
   }
+
+  handleClick = (locale) => {
+    this.setState({
+      locale: locale,
+    });
+  };
+
   render() {
+    const { date, locale } = this.state;
     return (
-      <h1 className="heading">
-        <span className="text">
-          {this.state.date.toLocaleTimeString(this.props.locale)}
-        </span>
-      </h1>
+      <div>
+        <h1 className="heading">
+          <span className="text">
+            {this.state.date.toLocaleTimeString(locale)}
+          </span>
+        </h1>
+        <button onClick={() => this.handleClick('en-US')}>Click Here</button>
+      </div>
     );
   }
 }
